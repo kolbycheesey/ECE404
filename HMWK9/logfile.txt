@@ -1,0 +1,88 @@
+
+
+
+New message log:
+1
+From m.kolb.doc@gmail.com Mon Apr  5 12:09:29 2021
+ Subject: Test
+  Folder: spamFolder							   2898
+
+
+
+New message log:
+2
+From gsbsurfing-bounces@lists.stanford.edu Tue Apr  6 14:40:56 2021
+ Subject: confirm 99b6803f4ff49a5aa30788789c3e842b58c1febd
+  Folder: spamFolder							   2613
+
+
+
+New message log:
+3
+From gsc-volunteers-bounces@lists.stanford.edu Tue Apr  6 14:40:57 2021
+ Subject: confirm 2b1d5f765d5fe1b75d5c7f6e2e5233c5359b6a7d
+  Folder: spamFolder							   2670
+
+
+
+New message log:
+4
+From haas-peer-advisors-bounces@lists.stanford.edu Tue Apr  6 14:41:02 2021
+ Subject: confirm 59a188bf22f3e1b403ed0b2ff360f6b638133391
+  Folder: spamFolder							   2725
+
+
+
+New message log:
+5
+From haiti-relief-bounces@lists.stanford.edu Tue Apr  6 14:41:18 2021
+ Subject: confirm 3daf6ad10f78da5e40a6591e9806c2365e9017db
+  Folder: spamFolder							   2642
+
+
+
+New message log:
+6
+From hammarheads-bounces@lists.stanford.edu Tue Apr  6 14:41:20 2021
+ Subject: confirm e9731892afa98082c6093e9fb38cae63b2eb7c54
+  Folder: spamFolder							   2627
+
+
+
+New message log:
+7
+From hamstaff0809-bounces@lists.stanford.edu Tue Apr  6 14:41:24 2021
+ Subject: confirm 786bca581a5abcb8a59389ad0ed569fdea3742f9
+  Folder: spamFolder							   2642
+
+
+
+New message log:
+8
+From hanson-group-bounces@lists.stanford.edu Tue Apr  6 14:41:26 2021
+ Subject: confirm 2fce325158aaca02e0e0350449105f71218b1909
+  Folder: spamFolder							   2641
+
+
+
+New message log:
+9
+From happinesscollective-bounces@lists.stanford.edu Tue Apr  6 14:41:37 2021
+ Subject: confirm b2f6e715414f270b7c0d33c90ba47da69fbb8474
+  Folder: spamFolder							   2740
+
+
+
+New message log:
+10
+From harmonics-alumni-bounces@lists.stanford.edu Tue Apr  6 14:41:44 2021
+ Subject: confirm f6ca6b6f3fcee2ede5cd1750e80c632b0ce6d494
+  Folder: spamFolder							   2733
+
+
+
+New message log:
+11
+From harmonics-alumni-local-bounces@lists.stanford.edu Tue Apr  6 14:41:47 2021
+ Subject: confirm bf8bcbac5d8655b8a19318ac8517297fe950846a
+  Folder: spamFolder							   2806
