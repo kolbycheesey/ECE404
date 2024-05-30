@@ -28,55 +28,55 @@ def decrypt(file_in_name, kettxt, file_out_name):
     round_keys, key_words, numRounds = start(key, keysize)
 
     roundCount = 0
-    FILEOUT = open(file_out_name, 'w')
-    FILEIN = open(file_in_name)
-    temp = FILEIN.read()
-    bv = BitVector( hexstring = temp)
-    size = bv.size
-    count = 0
-    while(count < size):
-        bitvec = bv[count:count+128]
-        count += 128
-        if(len(bitvec) < 128):
-            hold = BitVector(intVal = 0, size = 128-len(bitvec))
-            bitvec = bitvec + hold
+    with open(file_out_name, 'w') as FILEOUT:
+        with open(file_in_name) as FILEIN:
+            temp = FILEIN.read()
+        bv = BitVector( hexstring = temp)
+        size = bv.size
+        count = 0
+        while(count < size):
+            bitvec = bv[count:count+128]
+            count += 128
+            if(len(bitvec) < 128):
+                hold = BitVector(intVal = 0, size = 128-len(bitvec))
+                bitvec = bitvec + hold
     
-        state_array = gen_state_array(bitvec)
-        #inverseshift
-        state_array = xorRoundKey(round_keys[numRounds], state_array)
+            state_array = gen_state_array(bitvec)
+            #inverseshift
+            state_array = xorRoundKey(round_keys[numRounds], state_array)
 
-        state_array = gen_state_array(state_array)
+            state_array = gen_state_array(state_array)
 
-        for x in range(numRounds):
-            #print("stateA: ",state_array,"\n")
-            out1 = invShiftRows(state_array)
-            #print(out1,"\n\n")
-            out2 = invSubBytes(out1)
-            out3 = xorRoundKey(round_keys[(numRounds-1) - x],out2)  #might change to not include the 1
-            #print("out3: ",out3,"\n\n")
-            #print("round_key: ",round_keys[numRounds-x],"\n\n")
-            state_array = gen_state_array(out3)
-            if x != (numRounds - 1):
-                out4 = invMixCols(state_array)
-                state_array = out4
-                
-                #print("out4: ", type(out4),"\n\n")
-                #state_array = gen_state_array(out4)        #shouldnt need to change a list back, so might not need it here will test more
-                #print("we get here\n\n")
+            for x in range(numRounds):
+                #print("stateA: ",state_array,"\n")
+                out1 = invShiftRows(state_array)
+                #print(out1,"\n\n")
+                out2 = invSubBytes(out1)
+                out3 = xorRoundKey(round_keys[(numRounds-1) - x],out2)  #might change to not include the 1
+                #print("out3: ",out3,"\n\n")
+                #print("round_key: ",round_keys[numRounds-x],"\n\n")
+                state_array = gen_state_array(out3)
+                if x != (numRounds - 1):
+                    out4 = invMixCols(state_array)
+                    state_array = out4
+                    
+                    #print("out4: ", type(out4),"\n\n")
+                    #state_array = gen_state_array(out4)        #shouldnt need to change a list back, so might not need it here will test more
+                    #print("we get here\n\n")
             #else:
-                #state_array = gen_state_array(out3)
-                #print("we also get here\n\n")
+                    #state_array = gen_state_array(out3)
+                    #print("we also get here\n\n")
 
-            #print(state_array[0][0],"\n\n")
-            #print("1: ",out1,"\n2: ",out2,"\n3: ",out3,"\n4: ",out4,"\n")
-            #print(type(out1),"\n",type(out2),"\n",type(out3),"\n",type(out4),"\n")
+                #print(state_array[0][0],"\n\n")
+                #print("1: ",out1,"\n2: ",out2,"\n3: ",out3,"\n4: ",out4,"\n")
+                #print(type(out1),"\n",type(out2),"\n",type(out3),"\n",type(out4),"\n")
 
-        for t in range(4):
-            for i in range(4):
-                #print(state_array[t][i])
-                FILEOUT.write(state_array[t][i].get_bitvector_in_ascii())
+            for t in range(4):
+                for i in range(4):
+                    #print(state_array[t][i])
+                    FILEOUT.write(state_array[t][i].get_bitvector_in_ascii())
 
-    FILEOUT.close
+        FILEOUT.close
 
 
 def encrypt(file_in_name, keytxt,file_out_name):
@@ -87,41 +87,41 @@ def encrypt(file_in_name, keytxt,file_out_name):
     #print("round: ",round_keys,"\n\n")
 
     roundCount = 0
-    FILEOUT = open(file_out_name, 'w')
+    with open(file_out_name, 'w') as FILEOUT:
 
-    bv = BitVector( filename = file_in_name)
-    while(bv.more_to_read):
-        bitvec = bv.read_bits_from_file(128)
-        if len(bitvec) < 128:
-            hold = BitVector(intVal = 0, size = 128-len(bitvec))
-            bitvec = bitvec + hold
+        bv = BitVector( filename = file_in_name)
+        while(bv.more_to_read):
+            bitvec = bv.read_bits_from_file(128)
+            if len(bitvec) < 128:
+                hold = BitVector(intVal = 0, size = 128-len(bitvec))
+                bitvec = bitvec + hold
 
-        #print(type(round_keys))
+            #print(type(round_keys))
 
-        state_array = gen_state_array(bitvec)
-        #print(type(state_array))
-        state_array = xorRoundKey(round_keys[0], state_array) ##round_key[0]
-        #print(state_array)
-        state_array = gen_state_array(state_array)
+            state_array = gen_state_array(bitvec)
+            #print(type(state_array))
+            state_array = xorRoundKey(round_keys[0], state_array) ##round_key[0]
+            #print(state_array)
+            state_array = gen_state_array(state_array)
+            
+            for x in range(numRounds):
+                #print("stateA: ",state_array),"\n")
+                out1 = subBytes(state_array)
+                out2 = shiftRows(out1)
+                if x != (numRounds - 1):
+                    out3 = mixCols(out2)
+                    out4 = xorRoundKey(round_keys[x+1], out3)
+                else:
+                    out4 = xorRoundKey(round_keys[x+1], out2)
         
-        for x in range(numRounds):
-            #print("stateA: ",state_array),"\n")
-            out1 = subBytes(state_array)
-            out2 = shiftRows(out1)
-            if x != (numRounds - 1):
-                out3 = mixCols(out2)
-                out4 = xorRoundKey(round_keys[x+1], out3)
-            else:
-                out4 = xorRoundKey(round_keys[x+1], out2)
-        
-            state_array = gen_state_array(out4)            
-        
-        #print(state_array,"\n\n")
-        for t in range(4):
-            for i in range(4):
-                FILEOUT.write(state_array[t][i].get_bitvector_in_hex())
+                state_array = gen_state_array(out4)            
+            
+            #print(state_array,"\n\n")
+            for t in range(4):
+                for i in range(4):
+                    FILEOUT.write(state_array[t][i].get_bitvector_in_hex())
 
-    FILEOUT.close
+        FILEOUT.close
     return
 
 
@@ -183,17 +183,17 @@ def rotate(array,n):
 #copied and altered from generate_round_kkeys.py
 def get_encryption_key(keytxt):
     key = ""
-    FILEIN = open(keytxt)
-    #gathered from gen_encryption_key.py will change to work with my script
-    key = FILEIN.read()
+    with open(keytxt) as FILEIN:
+        #gathered from gen_encryption_key.py will change to work with my script
+        key = FILEIN.read()
 
-    #if len(key) != 8:
-    #    print("\nKey generation needs 8 characters exactly.  Try again.\n")
+        #if len(key) != 8:
+        #    print("\nKey generation needs 8 characters exactly.  Try again.\n")
 
-    key = BitVector(textstring = key)
-    keysize = len(key)          ##might consider changing to just /8 instead of floor divide
-    #print("keysize: ",keysize, key) ## check
-    FILEIN.close
+        key = BitVector(textstring = key)
+        keysize = len(key)          ##might consider changing to just /8 instead of floor divide
+        #print("keysize: ",keysize, key) ## check
+        FILEIN.close
     return key, keysize
 
 def shiftRows(stateArray):
