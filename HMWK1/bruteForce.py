@@ -24,10 +24,8 @@ bv_iv = BitVector(bitlist = [0]*BLOCKSIZE)                                  #(F)
 for i in range(0,len(PassPhrase) // numbytes):                              #(G)
     textstr = PassPhrase[i*numbytes:(i+1)*numbytes]                         #(H)
     bv_iv ^= BitVector( textstring = textstr )                              #(I)
-
-# Create a bitvector from the ciphertext hex string:
-FILEIN = open(sys.argv[1])                                                  #(J)
-encrypted_bv = BitVector( hexstring = FILEIN.read() )                       #(K)
+with open(sys.argv[1]) as FILEIN:
+    encrypted_bv = BitVector( hexstring = FILEIN.read() )                       #(K)
 
 # Get key from user: this is the brute force method
 key = None

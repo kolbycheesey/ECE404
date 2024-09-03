@@ -150,17 +150,17 @@ def rotate(array,n):
 #copied and altered from generate_round_kkeys.py
 def get_encryption_key(keytxt):
     key = ""
-    FILEIN = open(keytxt)
-    #gathered from gen_encryption_key.py will change to work with my script
-    key = FILEIN.read()
+    with open(keytxt) as FILEIN:
+        #gathered from gen_encryption_key.py will change to work with my script
+        key = FILEIN.read()
 
-    #if len(key) != 8:
-    #    print("\nKey generation needs 8 characters exactly.  Try again.\n")
+        #if len(key) != 8:
+        #    print("\nKey generation needs 8 characters exactly.  Try again.\n")
 
-    key = BitVector(textstring = key)
-    keysize = len(key)          ##might consider changing to just /8 instead of floor divide
-    #print("keysize: ",keysize, key) ## check
-    FILEIN.close
+        key = BitVector(textstring = key)
+        keysize = len(key)          ##might consider changing to just /8 instead of floor divide
+        #print("keysize: ",keysize, key) ## check
+        FILEIN.close
     return key, keysize
 
 def shiftRows(stateArray):
