@@ -24,7 +24,7 @@
 ##              returned.
 
 import sys
-import random
+import secrets
 
 ############################  class PrimeGenerator  ##############################
 class PrimeGenerator( object ):                                              #(A1)
@@ -38,7 +38,7 @@ class PrimeGenerator( object ):                                              #(A
         self._largest        =     (1 << bits) - 1                           #(A8)
 
     def set_initial_candidate(self):                                         #(B1)
-        candidate = random.getrandbits( self.bits )                          #(B2)
+        candidate = secrets.SystemRandom().getrandbits(self.bits )                          #(B2)
         if candidate & 1 == 0: candidate += 1                                #(B3)
         candidate |= (1 << self.bits-1)                                      #(B4)
         candidate |= (2 << self.bits-3)                                      #(B5)

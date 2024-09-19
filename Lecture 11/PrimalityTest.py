@@ -11,6 +11,8 @@
 ### set of randomly altered 36 primes.  On the other hand, if you call it with just
 ### one arg, it returns the answer for that integer.
 
+import secrets
+
 def test_integer_for_prime(p):                                               #(A1)
     if p == 1: return 0                                                      #(A2)
     probes = [2,3,5,7,11,13,17]                                              #(A3)
@@ -43,11 +45,10 @@ primes = [179, 233, 283, 353, 419, 467, 547, 607, 661, 739, 811, 877, \
 if __name__ == '__main__':
 
     import sys                                                               #(M1)
-    import random                                                            #(M2)
 
     if len(sys.argv) == 1:                                                   #(M3)
         for p in primes:                                                     #(M4)
-            p += random.randint(1,10)                                        #(M5)
+            p += secrets.SystemRandom().randint(1,10)                                        #(M5)
             probability_of_prime = test_integer_for_prime(p)                 #(M6)
             if probability_of_prime > 0:                                     #(M7)
                 print("%d is prime with probability: %f" %(p,probability_of_prime))
