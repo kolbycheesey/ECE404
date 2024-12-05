@@ -105,17 +105,17 @@ def encrypt(file_in_name, keytxt):                                             #
 #copied and altered from generate_round_kkeys.py
 def get_encryption_key(keytxt):
     key = ""
-    FILEIN = open(keytxt)
-    #gathered from gen_encryption_key.py will change to work with my script
-    key = FILEIN.read(8)
-    #print(key)
+    with open(keytxt) as FILEIN:
+        #gathered from gen_encryption_key.py will change to work with my script
+        key = FILEIN.read(8)
+        #print(key)
 
-    if len(key) != 8:
-        print("\nKey generation needs 8 characters exactly.  Try again.\n")
+        if len(key) != 8:
+            print("\nKey generation needs 8 characters exactly.  Try again.\n")
 
-    key = BitVector(textstring = key)
-    key = key.permute(key_permutation_1)
-    FILEIN.close
+        key = BitVector(textstring = key)
+        key = key.permute(key_permutation_1)
+        FILEIN.close
     #print(key)
     return key                                  #this should be the 56-bit encryption key
 # copied from illustrate_des_substitution
@@ -155,18 +155,16 @@ if __name__ == '__main__':
     file_in_name = sys.argv[1]
     keytxt = sys.argv[2]
     file_out_name = sys.argv[3]
-    #print(action, file_in_name, keytxt, file_out_name)
-    FILEIN = open(file_in_name, 'rb')
-    FILEOUT = open(file_out_name, 'wb')
-    hold = FILEIN.readline()
-    hold += FILEIN.readline()
-    hold += FILEIN.readline()
-    print(hold)
+    with open(file_in_name, 'rb') as FILEIN:
+        with open(file_out_name, 'wb') as FILEOUT:
+            hold = FILEIN.readline()
+            hold += FILEIN.readline()
+            hold += FILEIN.readline()
+            print(hold)
 
-    encryptedMessage = encrypt(file_in_name, keytxt)
-    hexMessage = encryptedMessage.get_bitvector_in_hex()#BitVector(hexstring = str(encryptedMessage))
-    #print('hexMessage: ', hexMessage)
-    FILEOUT = open(file_out_name, 'w')
-    FILEOUT.write(hexMessage)
-    FILEIN.close
-    FILEOUT.close
+            encryptedMessage = encrypt(file_in_name, keytxt)
+            hexMessage = encryptedMessage.get_bitvector_in_hex()#BitVector(hexstring = str(encryptedMessage))
+            with open(file_out_name, 'w') as FILEOUT:
+                FILEOUT.write(hexMessage)
+                FILEIN.close
+                FILEOUT.close
