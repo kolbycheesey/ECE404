@@ -44,14 +44,14 @@ K = ["428a2f98d728ae22", "7137449123ef65cd", "b5c0fbcfec4d3b2f",
 Kbv = [BitVector(hexstring = value) for value in K]
 
 def SHA512(filein):
-    infile = open(filein, 'r')
-    temp = infile.read()
-    #print(temp)
-    bv = BitVector(textstring = temp)
+    with open(filein, 'r') as infile:
+        temp = infile.read()
+        #print(temp)
+        bv = BitVector(textstring = temp)
 
-    #print(bv)
+        #print(bv)
 
-    infile.close
+        infile.close
 
 
     #8 64 bit words found on page 43 of lecture 15
@@ -152,16 +152,16 @@ if __name__ == '__main__':
     fileout = sys.argv[2]
 
     msg = SHA512(filein)
-    outfile = open(fileout, 'w')
-    outfile.write(msg)
-    outfile.close
-    infile = open(filein, 'r')
-    comp = infile.read()
-    if msg == hashlib.sha512(comp.encode('utf-8')).hexdigest():
-        print("Ouput Matches!")
-        print("Done!")
-        infile.close
-    else:
-        print("There is an error check the output in: ", fileout)
-        infile.close
+    with open(fileout, 'w') as outfile:
+        outfile.write(msg)
+        outfile.close
+    with open(filein, 'r') as infile:
+        comp = infile.read()
+        if msg == hashlib.sha512(comp.encode('utf-8')).hexdigest():
+            print("Ouput Matches!")
+            print("Done!")
+            infile.close
+        else:
+            print("There is an error check the output in: ", fileout)
+            infile.close
 
