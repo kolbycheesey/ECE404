@@ -8,8 +8,8 @@
 ##  Uncomment line (F9) and comment out line (F10) if you want to see the results
 ##  with the simpler form of the Pollard-Rho algorithm.
 
-import random
 import sys
+import secrets
 
 def factorize(n):                                                            #(F1)
     prime_factors = []                                                       #(F2)
@@ -56,11 +56,11 @@ def pollard_rho_simple(p):                                                   #(Q
     for a in probes:                                                         #(Q3)
         if p%a == 0: return a                                                #(Q4)
     d = 1                                                                    #(Q5)
-    a = random.randint(2,p)                                                  #(Q6)
+    a = secrets.SystemRandom().randint(2,p)                                                  #(Q6)
     random_num = []                                                          #(Q7)
     random_num.append( a )                                                   #(Q8)
     while d==1:                                                              #(Q9)
-        b = random.randint(2,p)                                              #(Q10)
+        b = secrets.SystemRandom().randint(2,p)                                              #(Q10)
         for a in random_num[:]:                                              #(Q11)
             d = gcd( a-b, p )                                                #(Q12)
             if d > 1: break                                                  #(Q13)
@@ -72,8 +72,8 @@ def pollard_rho_strong(p):                                                   #(R
     for a in probes:                                                         #(R3)
         if p%a == 0: return a                                                #(R4)
     d = 1                                                                    #(R5)
-    a = random.randint(2,p)                                                  #(R6)
-    c = random.randint(2,p)                                                  #(R7)
+    a = secrets.SystemRandom().randint(2,p)                                                  #(R6)
+    c = secrets.SystemRandom().randint(2,p)                                                  #(R7)
     b = a                                                                    #(R8)
     while d==1:                                                              #(R9)
         a = (a * a + c) % p                                                  #(R10)
