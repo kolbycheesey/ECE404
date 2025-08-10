@@ -158,9 +158,9 @@ if __name__ == '__main__':
     #print(action, file_in_name, keytxt, file_out_name)
     FILEIN = open(file_in_name, 'rb')
     FILEOUT = open(file_out_name, 'wb')
-    hold = FILEIN.readline()
-    hold += FILEIN.readline()
-    hold += FILEIN.readline()
+    hold = FILEIN.readline(5_000_000)
+    hold += FILEIN.readline(5_000_000)
+    hold += FILEIN.readline(5_000_000)
     print(hold)
 
     encryptedMessage = encrypt(file_in_name, keytxt)
